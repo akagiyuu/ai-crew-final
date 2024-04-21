@@ -7,7 +7,7 @@ class Student:
         hometown: str,
         faculty: str,
         major: str,
-        student_class: str
+        student_class: str,
     ) -> None:
         self.id = id
         self.full_name = full_name
@@ -17,6 +17,7 @@ class Student:
         self.major = major
         self.student_class = student_class
         pass
+
     def __str__(self) -> str:
         return (
             "Student: [\n"
@@ -29,3 +30,6 @@ class Student:
             f"    class: {self.student_class}\n"
             "]"
         )
+
+    def to_csv_entry(self) -> str:
+        return f"{self.id},{self.full_name},{self.date_of_birth},{self.hometown},{self.faculty},{self.major},{self.student_class}"

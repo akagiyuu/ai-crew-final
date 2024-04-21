@@ -11,6 +11,7 @@ MAIN_MENU_OPTIONS.push_back("Delete student")
 MAIN_MENU_OPTIONS.push_back("Update student")
 MAIN_MENU_OPTIONS.push_back("Get student")
 MAIN_MENU_OPTIONS.push_back("Get all students")
+MAIN_MENU_OPTIONS.push_back("Save")
 MAIN_MENU_OPTIONS.push_back("Quit")
 
 manager = StudentManager()
@@ -70,6 +71,9 @@ while True:
         case 4:
             print(manager.students)
         case 5:
+            manager.save()
+        case 6:
+            manager.save()
             break
         case _:
             raise RuntimeError("Unknown error")

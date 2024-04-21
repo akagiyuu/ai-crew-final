@@ -1,10 +1,27 @@
 from data_structure.vec_dequeue import VecDequeue
 from student import Student
+import os
 
 
 class StudentManager:
-    def __init__(self) -> None:
+    def __init__(self, data_path: str = "data.csv") -> None:
         self.students = VecDequeue[Student]()
+        if not os.path.isfile(data_path):
+            return
+        with open(data_path, "r") as file:
+            for csv_entry in file.readlines():
+                csv_entry = csv_entry.split(",")
+                self.students.push_back(
+                    Student(
+                        csv_entry[0],
+                        csv_entry[1],
+                        csv_entry[2],
+                        csv_entry[3],
+                        csv_entry[4],
+                        csv_entry[5],
+                        csv_entry[6],
+                    )
+                )
 
     def __contains__(self, id: str) -> bool:
         return self.get_student_index(id) is not None
@@ -62,3 +79,8 @@ class StudentManager:
             student.major = major
         if student_class is not None:
             student.student_class = student_class
+
+    def save(self, path: str = "data.csv"):
+        with open(path, "w+") as file:
+            for student in self.students:
+                file.write(student.to_csv_entry())
